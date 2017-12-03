@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lorem Ipsum</title>
+    <link rel="stylesheet" type="text/css" href="static/home_style.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik">
+    <link href="https://fonts.googleapis.com/css?family=Spectral+SC" rel="stylesheet">
+    <link rel="stylesheet" href="static/jquery-ui.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript">
+        $(function() {
+        $.ajax({
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: true,
+            url: '/autocomplete'
+            }).done(function (data) {
+                $('#autocomplete').autocomplete({
+                    source: data.json_list,
+                    minLength: 3,
+                });
+            });
+        });
+
+        function postPlaylist() {
+            var track_and_artist = document.getElementById("autocomplete").value;
+            console.log(track_and_artist);
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "/playlist",
+                dataType: "json",
+                async: true,
+                data: JSON.stringify({'track_and_artist': track_and_artist}),
+                success: function (results) {
+                    console.log("Success")
+                    $('html, body').animate({ scrollTop: 0 }, 'fast');
+                    $(tracks).empty();
+                    $(track_container).empty();
+                    $('#export_container').empty();
+                    for (i = 0; i < 10; i++){
+                        var track_name = results['playlist'][i][0];
+                        var artist_name = results['playlist'][i][1];
+                        var li = document.createElement('li');
+                        var export_button = document.createElement('button');
+
+                        li.setAttribute('id', 'track');
+                        li.setAttribute('type', 'submit');
+                        li.setAttribute('onclick', 'postTrackInfo(this.innerText)');
+                        li.value = i;
+                        li.innerText = track_name + ' by ' + artist_name;
+
+                        var container = document.getElementById('tracks');
+                        container.append(li);
+
+
+                        $('li').click(function(){
+                            $('.highlight').removeClass('highlight');
+                            $(this).addClass('highlight');
+                            $('li').addClass('hover');
+                            $(this).removeClass('hover');
+                        });
+                    }
+
+                    export_button.setAttribute('type', 'submit');
+                    export_button.setAttribute('id', 'export_button');
+                    export_button.innerText = 'Export';
+                    var export_container = document.getElementById('export_container');
+                    export_container.append(export_button);
+                },
+                error: function(error) {
+                    console.log("failure")
+                }
+            })
+        }
+
+        function postTrackInfo(clicked_text) {
+            console.log(clicked_text);
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "/track_info",
+                dataType: "json",
+                async: true,
+                data: JSON.stringify({'track_and_artist': clicked_text}),
+                success: function (results) {
+                    console.log("Success")
+                    $('html, body').animate({ scrollTop: 0 }, 'fast');
+                    $(track_container).empty();
+                    var album_art = results['track_info'][0];
+                    var track_name = results['track_info'][1];
+                    var artist_name = results['track_info'][2];
+                    var lyrics = results['track_info'][3];
+
+                    var img = document.createElement('img');
+                    img.setAttribute('src', album_art);
+                    img.setAttribute('id', 'album_art');
+                    img.setAttribute('onclick', 'play_preview()');
+                    img.setAttribute('value', track_name + ' by ' + artist_name);
+
+                    var container = document.getElementById('track_container');
+                    container.prepend(img);
+
+                    var track_info = document.createElement('div');
+
+                    var track = document.createElement('p');
+                    var artist = document.createElement('p');
+
+                    track_info.setAttribute('id', 'track_info');
+                    track.setAttribute('style', 'line-height: 30px;');
+                    track.innerText = track_name;
+                    artist.innerText = artist_name;
+
+                    track.setAttribute('style', 'font-size: 32px;line-height:32px;');
+                    artist.setAttribute('style', 'font-size: 20px;line-height:0;');
+
+                    track_info.appendChild(track);
+                    track_info.appendChild(artist);
+
+                    container.append(track_info);
+
+                    var lyrics_div = document.createElement('div');
+                    var lyrics_p = document.createElement('p');
+                    lyrics_div.setAttribute('id', 'lyrics');
+
+                    lyrics_p.innerText = lyrics;
+                    lyrics_div.appendChild(lyrics_p);
+                    container.append(lyrics_div);
+
+                },
+                error: function(error) {
+                    console.log("failure")
+                }
+            })
+        }
+
+        function play_preview() {
+            var track_and_artist = document.getElementById("album_art").getAttribute('value');
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "/track_preview",
+                dataType: "json",
+                async: true,
+                data: JSON.stringify({'track_and_artist': track_and_artist}),
+                success: function (results) {
+                    console.log("Success");
+                    var preview_url = results['preview_url'];
+                    if (preview_url == null) {
+                        console.log('NO PREVIEW URL');
+                    }
+                    else {
+                        $('#track_container').append('<audio id="embed_player" src=" '+ results['preview_url'] +' " hidden="true"></audio>');
+                        var audio = document.getElementById('embed_player');
+                        audio.volume = 0.1;
+                        if (audio.paused) {
+                            console.log('Audio Played');
+                            audio.play();
+                            $('#album_art').css('border', '2px solid #ec0356');
+                            $('#track').css('color', '#ec0356');
+
+                            var timeLeft = 28;
+                            var timerId = setInterval(countdown, 1000);
+                            function countdown() {
+                                if (timeLeft == -1) {
+                                    clearTimeout(timerId);
+                                    $('#album_art').css('border', '2px solid black');
+                                    $('#track').css('color', 'black');
+                                    audio.pause();
+                                } else {
+                                    timeLeft--;
+                                }
+                            }
+
+                        }else{
+                            console.log('Audio Paused');
+                            audio.pause();
+                            audio.currentTime = 0
+                            $('#album_art').css('border', '2px solid black');
+                            $('#track').css('color', 'black');
+                        }
+                    }
+                },
+                error: function(error) {
+                    console.log("failure");
+                }
+            })
+
+        }
+    </script>
+</head>
+<body>
+    <div class="outer_container">
+        <!--<hr class="vline" />-->
+        <div class="background_left"></div>
+        <div class="background_right"></div>
+        <div class="content">
+            <p id="home_title">Lorem Ipsum</p>
+            <p id="home_desc">Build a playlist around your favorite hip-hop song.</p>
+        </div>
+        <div class="search_container">
+            <button type="submit" id="create_button" onclick="postPlaylist()">Create</button>
+            <input id="autocomplete">
+            <!--<hr id="horizontal_line">-->
+        </div>
+        <div class="playlist">
+            <ul id="tracks" style="list-style-type:none">
+
+            </ul>
+        </div>
+        <div id="track_container">
+
+        </div>
+        <div id="export_container">
+        </div>
+    </div>
+</body>
+</html>
