@@ -45,7 +45,6 @@
                         var track_name = results['playlist'][i][0];
                         var artist_name = results['playlist'][i][1];
                         var li = document.createElement('li');
-                        var export_button = document.createElement('button');
 
                         li.setAttribute('id', 'track');
                         li.setAttribute('type', 'submit');
@@ -56,20 +55,15 @@
                         var container = document.getElementById('tracks');
                         container.append(li);
 
-
                         $('li').click(function(){
                             $('.highlight').removeClass('highlight');
                             $(this).addClass('highlight');
                             $('li').addClass('hover');
+                            $('li').removeClass('playing');
                             $(this).removeClass('hover');
+                            clearTimeout(t);
                         });
                     }
-
-                    export_button.setAttribute('type', 'submit');
-                    export_button.setAttribute('id', 'export_button');
-                    export_button.innerText = 'Export';
-                    var export_container = document.getElementById('export_container');
-                    export_container.append(export_button);
                 },
                 error: function(error) {
                     console.log("failure")
@@ -101,8 +95,17 @@
                     img.setAttribute('onclick', 'play_preview()');
                     img.setAttribute('value', track_name + ' by ' + artist_name);
 
+                    var bar = document.createElement('div');
+                    bar.setAttribute('id', 'progress_bar');
+
+                    var bar_container = document.createElement('div');
+                    bar_container.setAttribute('id', 'progress_bar_container');
+
+                    bar_container.appendChild(bar)
+
                     var container = document.getElementById('track_container');
                     container.prepend(img);
+                    container.appendChild(bar_container);
 
                     var track_info = document.createElement('div');
 
@@ -114,7 +117,7 @@
                     track.innerText = track_name;
                     artist.innerText = artist_name;
 
-                    track.setAttribute('style', 'font-size: 32px;line-height:32px;');
+                    track.setAttribute('style', 'font-size: 32px;line-height:32px;margin-top:25px');
                     artist.setAttribute('style', 'font-size: 20px;line-height:0;');
 
                     track_info.appendChild(track);
@@ -137,6 +140,34 @@
             })
         }
 
+        var t;
+        var count;
+
+        function countdown() {
+            if (count === -1) {
+                $('.highlight').removeClass('playing');
+                $('#album_art').css('border', '2.5px solid black');
+            } else {
+                count--;
+                t = setTimeout(countdown, 1000);
+            }
+        }
+
+        function move() {
+            var elem = document.getElementById('progress_bar');
+            console.log('moving');
+            var width = 0;
+            var id = setInterval(frame, 100);
+            function frame() {
+                if (width >= 290) {
+                    clearInterval(id);
+                } else {
+                    width++;
+                    elem.style.width = width/2.9 + '%';
+                }
+            }
+        }
+
         function play_preview() {
             var track_and_artist = document.getElementById("album_art").getAttribute('value');
             $.ajax({
@@ -147,7 +178,7 @@
                 async: true,
                 data: JSON.stringify({'track_and_artist': track_and_artist}),
                 success: function (results) {
-                    console.log("Success");
+                    console.log("Album Clicked");
                     var preview_url = results['preview_url'];
                     if (preview_url == null) {
                         console.log('NO PREVIEW URL');
@@ -155,32 +186,25 @@
                     else {
                         $('#track_container').append('<audio id="embed_player" src=" '+ results['preview_url'] +' " hidden="true"></audio>');
                         var audio = document.getElementById('embed_player');
-                        audio.volume = 0.1;
+                        audio.volume = 0.15;
+
                         if (audio.paused) {
                             console.log('Audio Played');
                             audio.play();
-                            $('#album_art').css('border', '2px solid #ec0356');
-                            $('#track').css('color', '#ec0356');
+                            $('.highlight').addClass('playing');
+                            $('#album_art').css('border', '2.5px solid #ec0356');
+                            count = 29;
+                            countdown();
+                            move();
+                        }
 
-                            var timeLeft = 28;
-                            var timerId = setInterval(countdown, 1000);
-                            function countdown() {
-                                if (timeLeft == -1) {
-                                    clearTimeout(timerId);
-                                    $('#album_art').css('border', '2px solid black');
-                                    $('#track').css('color', 'black');
-                                    audio.pause();
-                                } else {
-                                    timeLeft--;
-                                }
-                            }
-
-                        }else{
+                        else{
+                            clearTimeout(t);
                             console.log('Audio Paused');
                             audio.pause();
-                            audio.currentTime = 0
-                            $('#album_art').css('border', '2px solid black');
-                            $('#track').css('color', 'black');
+                            audio.currentTime = 0;
+                            $('.highlight').removeClass('playing');
+                            $('#album_art').css('border', '2.5px solid black');
                         }
                     }
                 },
@@ -203,7 +227,7 @@
         </div>
         <div class="search_container">
             <button type="submit" id="create_button" onclick="postPlaylist()">Create</button>
-            <input id="autocomplete">
+            <input id="autocomplete" placeholder="Track by Artist">
             <!--<hr id="horizontal_line">-->
         </div>
         <div class="playlist">
