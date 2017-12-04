@@ -203,13 +203,21 @@
     color: #7e7e7e;
 }
 
+.playing {
+    color: #ec0356;
+}
+
+.playing_border {
+    border: 2.5px solid #ec0356;
+}
+
 #album_art {
     margin: auto;
     display: block;
     width: 315px;
     height 315px;
-    border-radius: 10px;
-    border: 2px solid black;
+    border-radius: 12px;
+    border: 2.5px solid black;
 }
 
 #album_art:hover {
@@ -220,6 +228,21 @@
 #album_art:active {
     cursor: pointer;
     opacity:0.4;
+}
+
+#progress_bar_container {
+    width: 315px;
+    background-color: #f9fbff;
+    margin: auto;
+    border-radius: 10px;
+}
+
+#progress_bar {
+    width: 0%;
+    height: 7px;
+    background-color: #ec0356;
+    margin-top: 15px;
+    border-radius: 10px;
 }
 
 #track_info {
@@ -240,6 +263,18 @@
     color: #424242;
 }
 
+::-webkit-input-placeholder {
+   font-style: italic;
+}
+:-moz-placeholder {
+   font-style: italic;
+}
+::-moz-placeholder {
+   font-style: italic;
+}
+:-ms-input-placeholder {
+   font-style: italic;
+}
 
 
 
