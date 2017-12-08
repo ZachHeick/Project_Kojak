@@ -16,8 +16,8 @@ class Spotify_Tracks():
         self.track_ids = {} 
           
         self.engine_name = 'postgresql://' + 
-                            str(os.environ['zU']) + ':' + 
-                            str(os.environ['zP']) + 
+                            str(os.environ['POSTGRESQL_U']) + ':' + 
+                            str(os.environ['POSTGRESQL_P']) + 
                            '@13.59.54.149:5432/project_kojak'
         
         self.engine = create_engine(self.engine_name)
