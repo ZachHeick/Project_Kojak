@@ -28,7 +28,13 @@ class Spotify_Tracks():
     
         self.spotify = spotipy.Spotify(client_credentials_manager=self.client_credentials_manager)
         
+        
     def __get_albums_data(self, artist_id):
+        """
+        Gets album metadata for each artist_id
+        :param artist_id: spotify artist_id
+        :returns: artist_id with dictionary of album metadata
+        """
         results = self.spotify.artist_albums(artist_id, album_type='album')
         albums = results['items']
         albums_data = []
@@ -43,7 +49,13 @@ class Spotify_Tracks():
             albums_data.append(album_data)
         return {'artist_id': artist_id, 'albums_data': albums_data}
     
+    
     def __get_track_data(self, artist_album_data):
+        """
+        Gets track metadata from each artist's album
+        :param artist_album_data: JSON-like object of artist and their albums
+        :returns: track metadata
+        """
         tracks_data = []
         albums = artist_album_data['albums_data']
         for album in albums:
@@ -79,19 +91,25 @@ class Spotify_Tracks():
                     tracks_data.append(track_data)
         return tracks_data
     
+    
     def __insert_into_psql(self):
+        """
+        Inserts all collected data into PostgreSQL database
+        """
         m = MetaData()
         m.reflect(self.engine)
         conn = self.engine.connect()
         conn.execute(m.tables['tracks'].insert(), [d for d in self.tracks if d is not []])
 
-    def get_artist_ids(self):
-        return self.artist_ids
-
+    
     def collect_and_save_tracks(self):
+        """
+        Uploads saved data to AWS bucket
+        """
         for artist_id in self.artist_ids:
             albums_data = self.__get_albums_data(artist_id)
             self.tracks += self.__get_track_data(albums_data)
+            
         print('Got tracks')
         
         s3 = boto3.client('s3', 
@@ -103,8 +121,6 @@ class Spotify_Tracks():
         self.__insert_into_psql()
         print('Inserted Tracks')
 
-    def get_tracks(self):
-        return self.tracks
 
 
 st = Spotify_Tracks()
