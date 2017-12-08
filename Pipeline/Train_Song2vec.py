@@ -1,3 +1,10 @@
+"""
+Topic: Project 5  
+Subject: Training Song2vec model 
+Date: 12/12/2017  
+Name: Zach Heick  
+"""
+
 import boto3
 import random
 import os
@@ -23,16 +30,27 @@ tokenizer = RegexpTokenizer(r'\w+')
 stopword_set = set(stopwords.words('english'))
 
 def get_clean_lyrics(documents):
+    """
+    Preprocessing song lyrics
+    :param documents: list of song lyrics, each document is a song
+    :returns: list of cleaned song lyrics
+    """
     clean_lyrics = []
     for document in documents:
         lines = document.lower().split('\n')
         tokenized_lines = []
         for line in lines:
+            
+            #Ignores lines that label which artist sings the verse
             if line != '' and line[-1] != ':':
                 tokens = tokenizer.tokenize(line.lower())
                 song_tokens = []
                 for token in tokens:
+                    
+                    #Ignore stopwords
                     if len(token) >= 1 and token != '' and token not in stopword_set:
+                        
+                        #Clean up some slang
                         if token[-3:] == 'in\'':
                             token += 'g'
                         song_tokens.append(token)
@@ -49,13 +67,21 @@ class LabeledLineSentence():
     def __init__(self, doc_list):
         self.doc_list = doc_list
 
+        
     def to_array(self):
+        """
+        Labels songs with an index value
+        """
         self.labeled_doc_list = []
         for i, doc in enumerate(self.doc_list):
             self.labeled_doc_list.append(doc2vec.LabeledSentence(doc, [i]))
         return self.labeled_doc_list
 
+    
     def shuffle_docs(self):
+        """
+        Shuffles list of songs
+        """
         random.shuffle(self.labeled_doc_list)
         return self.labeled_doc_list
 
