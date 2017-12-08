@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Lorem Ipsum</title>
+    <title>MyMix.io</title>
     <link rel="stylesheet" type="text/css" href="static/home_style.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik">
-    <link href="https://fonts.googleapis.com/css?family=Spectral+SC" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
     <link rel="stylesheet" href="static/jquery-ui.min.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -62,6 +63,7 @@
                             $('li').removeClass('playing');
                             $(this).removeClass('hover');
                             clearTimeout(t);
+                            clearInterval(id);
                         });
                     }
                 },
@@ -117,7 +119,7 @@
                     track.innerText = track_name;
                     artist.innerText = artist_name;
 
-                    track.setAttribute('style', 'font-size: 32px;line-height:32px;margin-top:25px');
+                    track.setAttribute('style', 'font-size: 34px;line-height:32px;margin-top:15px;margin-bottom:0px;');
                     artist.setAttribute('style', 'font-size: 20px;line-height:0;');
 
                     track_info.appendChild(track);
@@ -153,11 +155,13 @@
             }
         }
 
+        var id;
+
         function move() {
             var elem = document.getElementById('progress_bar');
             console.log('moving');
             var width = 0;
-            var id = setInterval(frame, 100);
+            id = setInterval(frame, 100);
             function frame() {
                 if (width >= 290) {
                     clearInterval(id);
@@ -182,6 +186,7 @@
                     var preview_url = results['preview_url'];
                     if (preview_url == null) {
                         console.log('NO PREVIEW URL');
+                        $('#progress_bar_container').css('background-color', 'grey');
                     }
                     else {
                         $('#track_container').append('<audio id="embed_player" src=" '+ results['preview_url'] +' " hidden="true"></audio>');
@@ -200,11 +205,13 @@
 
                         else{
                             clearTimeout(t);
+                            clearInterval(id);
                             console.log('Audio Paused');
                             audio.pause();
                             audio.currentTime = 0;
                             $('.highlight').removeClass('playing');
                             $('#album_art').css('border', '2.5px solid black');
+                            $('#progress_bar').css('width', '0%');
                         }
                     }
                 },
@@ -222,7 +229,10 @@
         <div class="background_left"></div>
         <div class="background_right"></div>
         <div class="content">
-            <p id="home_title">Lorem Ipsum</p>
+            <p id="home_title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyMix.io</p>
+            <div class="logo">
+                <img src="static/mixtape_vector_2.png" height="120" width="120">
+            </div>
             <p id="home_desc">Build a playlist around your favorite hip-hop song.</p>
         </div>
         <div class="search_container">
