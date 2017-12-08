@@ -1,3 +1,6 @@
+# Project Kojak: MyMix.io, a Hip-Hop Playlist Generator   
+### Project 5 of Metis Data Science Bootcamp 
+
 `Data_Collection`  
 
   1. `Database_Schemas.md`  
