@@ -1,3 +1,10 @@
+"""
+Topic: Project 5  
+Subject: Getting Track data from Spotify API
+Date: 12/12/2017  
+Name: Zach Heick  
+"""
+
 import numpy as np
 import pandas as pd
 from sqlalchemy import create_engine, MetaData, Table, select
