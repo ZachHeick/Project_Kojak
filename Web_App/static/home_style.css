@@ -37,6 +37,18 @@
     background-color: transparent;
 }
 
+.logo {
+    text-align: right;
+    position: fixed;
+    top:0;
+    bottom: 47.5%;
+    left: -129%;
+    right: 0;
+    margin: auto;
+    width: 50%;
+    height: 50%;
+}
+
 .search_container {
     text-align: center;
     position: fixed;
@@ -99,7 +111,8 @@
 
 #home_title {
     font-size: 87.5px;
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Raleway', sans-serif;
+    color: #771c85;
     font-weight: 900;
     margin: auto;
     padding-left: 30px;
@@ -172,8 +185,8 @@
 }
 
 #tracks {
-    font-size: 22px;
-    font-family: 'Rubik', sans-serif;
+    font-size: 24px;
+    font-family: 'Raleway', sans-serif;
     text-align:left;
     line-height: 2em;
     height: auto;
@@ -231,15 +244,15 @@
 }
 
 #progress_bar_container {
-    width: 315px;
-    background-color: #f9fbff;
+    width: 320px;
+    background-color: #e5eeff;
     margin: auto;
     border-radius: 10px;
 }
 
 #progress_bar {
     width: 0%;
-    height: 7px;
+    height: 5px;
     background-color: #ec0356;
     margin-top: 15px;
     border-radius: 10px;
@@ -247,7 +260,7 @@
 
 #track_info {
     text-align: center;
-    font-family: 'Spectral SC', serif;
+    font-family: 'Raleway', sans-serif;
     padding-right: 40px;
     padding-left: 40px;
 }
