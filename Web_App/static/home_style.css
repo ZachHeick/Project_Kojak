@@ -20,7 +20,7 @@
     right: 0px;
     width: 50%;
     height: 100%;
-    background-color: #e5eeff;
+    background-color: #efefef;
     z-index: -1;
 }
 
@@ -28,7 +28,7 @@
     text-align: left;
     position: fixed;
     top:0;
-    bottom: 60%;
+    bottom: 50%;
     left: -50%;
     right: 0;
     margin: auto;
@@ -38,23 +38,24 @@
 }
 
 .logo {
-    text-align: right;
+    text-align: left;
     position: fixed;
     top:0;
-    bottom: 47.5%;
-    left: -129%;
+    bottom: 40%;
+    left: -50%;
     right: 0;
     margin: auto;
     width: 50%;
     height: 50%;
+    padding-left:75px;
 }
 
 .search_container {
-    text-align: center;
+    text-align: left;
     position: fixed;
     top:0;
-    bottom: 43%;
-    left: -50%;
+    bottom: 45%;
+    left: -35%;
     right: 0;
     margin: auto;
     width: 60%;
@@ -66,13 +67,14 @@
     text-align: left;
     position: fixed;
     top:0;
-    bottom: 27.5%;
-    left: -49%;
+    bottom: 30.5%;
+    left: -50%;
     right: 0;
     margin: auto;
     width: 52%;
     height: 15%;
     background-color: transparent;
+    padding-left:20px;
 }
 
 #track_container {
@@ -86,19 +88,6 @@
     height: 50%;
 }
 
-#export_container {
-   text-align: left;
-    position: fixed;
-    top:0;
-    bottom: -100%;
-    left: -35%;
-    right: 0;
-    margin: auto;
-    width: 60%;
-    height: 15%;
-    background-color: transparent;
-}
-
 .ui-autocomplete {
     max-height: 200px;
     overflow-y: auto;
@@ -110,20 +99,22 @@
 }
 
 #home_title {
-    font-size: 87.5px;
+    font-size: 65px;
     font-family: 'Raleway', sans-serif;
-    color: #771c85;
+    color: #ec0356;
     font-weight: 900;
     margin: auto;
-    padding-left: 30px;
+    padding-left: 145px;
+    line-height:47.5px;
 }
 
 #home_desc {
     font-size: 20.5px;
     font-family: 'Rubik', sans-serif;
+    color: #7e7e7e;
     margin-bottom: auto;
     margin-top: 5px;
-    padding-left: 35px;
+    padding-left: 147.5px;
 }
 
 #autocomplete {
@@ -149,36 +140,13 @@
     color: white;
     cursor: pointer;
     font-size: 20px;
-    left: 20%;
-    width: 12.5%;
+    width: 100px;
     font-family: 'Rubik', sans-serif;
 }
 
 #create_button:hover {
     background-color:   #ba0142;
     border: 1px solid  #ba0142;
-    -webkit-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-}
-
-#export_button {
-    text-align: center;
-    background-color: #84bd00;
-    border: 1px solid #84bd00;
-    border-radius: 7px;
-    height: 1.75em;
-    color: white;
-    cursor: pointer;
-    font-size: 20px;
-    left: 20%;
-    width: 12.5%;
-    font-family: 'Rubik', sans-serif;
-}
-
-#export_button:hover {
-    background-color:   #6b9901;
-    border: 1px solid  #6b9901;
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
@@ -194,7 +162,7 @@
 
 #track {
     cursor: pointer;
-    padding-left:6px;
+    padding-left:5px;
     padding-right:40px;
     white-space:nowrap;
     overflow:hidden;
@@ -202,7 +170,7 @@
 }
 
 #track:hover {
-    background-color: #e5eeff;
+    background-color: #efefef;
     border-radius: 8px;
     color: black;
 }
@@ -221,7 +189,7 @@
 }
 
 .playing_border {
-    border: 2.5px solid #ec0356;
+    border: 3px solid #ec0356;
 }
 
 #album_art {
@@ -230,7 +198,7 @@
     width: 315px;
     height 315px;
     border-radius: 12px;
-    border: 2.5px solid black;
+    border: 3px solid black;
 }
 
 #album_art:hover {
