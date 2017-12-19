@@ -32,7 +32,6 @@ cymem==1.31.2
 Cython==0.26.1
 cytoolz==0.8.2
 dask==0.15.2
-datashape==0.5.4
 decorator==4.1.2
 dill==0.2.7.1
 distributed==1.18.1
