@@ -49,7 +49,7 @@ for i, row in enumerate(df[['track_name', 'artist_name']].itertuples()):
     TRACKS_AND_ARTISTS.append(track_name + ' by ' + artist_name)
     TRACKS_AND_ARTIST_INDEXES[track_name + ' by ' + artist_name] = i
 
-with open('neighbors', 'rb') as f:
+with open('Web_App/static/neighbors', 'rb') as f:
     NEIGHBORS = pickle.load(f)
 
 
