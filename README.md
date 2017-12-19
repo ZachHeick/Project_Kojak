@@ -1,4 +1,4 @@
-# MyMix.io, a Hip-Hop Playlist Generator   
+# MyMix.io: A Hip-Hop Playlist Generator   
 ### Project 5 of Metis Data Science Bootcamp 
 
 `Data_Collection`  
