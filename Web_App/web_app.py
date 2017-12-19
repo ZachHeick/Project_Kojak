@@ -121,7 +121,7 @@ def autocomplete():
 
 @app.route('/')
 def home():
-    with open("templates/home.html", 'r') as home_file:
+    with open("Web_App/templates/home.html", 'r') as home_file:
         return home_file.read()
 
 if __name__ == '__main__':
