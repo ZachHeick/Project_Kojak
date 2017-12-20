@@ -1,7 +1,7 @@
 # Mix Retriever: A Hip-Hop Playlist Generator   
 ### Project 5 of Metis Data Science Bootcamp 
 
-For the fifth and final project at Metis, we were given the freedom to solve any problem we were interested using any of the data science techniques and technologies from the bootcamp.  
+For the fifth and final project at Metis, we were given the freedom to solve any problem we were interested using any of the data science techniques and technologies we've learned from the bootcamp.  
 
 ---  
 
@@ -20,4 +20,4 @@ For the fifth and final project at Metis, we were given the freedom to solve any
   2. `Pipeline.ipynb`  
 
 
-`Web_App` contains files for the "MyMix.io" web app.
+`Web_App` contains files for the "Mix Retriever" web app.
