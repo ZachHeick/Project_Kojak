@@ -20,7 +20,7 @@
     right: 0px;
     width: 50%;
     height: 100%;
-    background-color: purple;
+    background-color: #e2e2e2;
     z-index: -1;
 }
 
@@ -61,7 +61,7 @@
     width: 60%;
     height: 15%;
     background-color: transparent;
-    padding-left: 210px;
+    padding-left: 15%;
 }
 
 .playlist {
