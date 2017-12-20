@@ -20,7 +20,7 @@
     right: 0px;
     width: 50%;
     height: 100%;
-    background-color: #efefef;
+    background-color: #e2e2e2;
     z-index: -1;
 }
 
@@ -55,12 +55,13 @@
     position: fixed;
     top:0;
     bottom: 45%;
-    left: -35%;
+    left: -50%;
     right: 0;
     margin: auto;
     width: 60%;
     height: 15%;
     background-color: transparent;
+    padding-left: 210px;
 }
 
 .playlist {
@@ -170,13 +171,13 @@
 }
 
 #track:hover {
-    background-color: #efefef;
+    background-color: #e2e2e2;
     border-radius: 8px;
     color: black;
 }
 
 .highlight {
-    background-color: #efefef;
+    background-color: #e2e2e2;
     border-radius: 8px;
 }
 
@@ -213,7 +214,7 @@
 
 #progress_bar_container {
     width: 320px;
-    background-color: #e5eeff;
+    background-color: #e2e2e2;
     margin: auto;
     border-radius: 10px;
 }
