@@ -40,7 +40,7 @@
     text-align: left;
     position: fixed;
     top:0;
-    bottom: 40%;
+    bottom: 39%;
     left: -50%;
     right: 0;
     margin: auto;
@@ -99,7 +99,7 @@
     font-weight: 900;
     margin: auto;
     padding-left: 145px;
-    line-height:47.5px;
+    line-height:50px;
 }
 
 #home_desc {
@@ -157,7 +157,7 @@
 #track {
     cursor: pointer;
     padding-left:5px;
-    padding-right:40px;
+    padding-right:160px;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
