@@ -55,13 +55,12 @@
     position: fixed;
     top:0;
     bottom: 45%;
-    left: -50%;
+    left: -35%;
     right: 0;
     margin: auto;
     width: 60%;
     height: 15%;
     background-color: transparent;
-    padding-left: 15%;
 }
 
 .playlist {
@@ -69,13 +68,12 @@
     position: fixed;
     top:0;
     bottom: 30.5%;
-    left: -50%;
+    left: -41%;
     right: 0;
     margin: auto;
-    width: 52%;
+    width: 60%;
     height: 15%;
     background-color: transparent;
-    padding-left:20px;
 }
 
 #track_container {
