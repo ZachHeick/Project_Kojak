@@ -13,6 +13,8 @@ To combine the functionality of individual song-based playlist generators with a
 
 ---  
 
+Listed below in cronological order are the folders containing code for this project. I collected my data from various sources, trained a Song2vec model on AWS, and added in other features to get the recommended playlist. I then built a web app that utilizes this recommendation system.  
+
 `Data_Collection`  
 
   1. `Database_Schemas.md`  
