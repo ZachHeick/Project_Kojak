@@ -32,4 +32,4 @@ Listed below in cronological order are the folders containing code for this proj
 
 `Web_App` contains files for [Mix Retriever](http://www.mixretriever.com/).  
 
-The blog post can be found here.
+The blog post can be found [here](https://zachheick.github.io/2017/12/12/Mix-Retriever/).
