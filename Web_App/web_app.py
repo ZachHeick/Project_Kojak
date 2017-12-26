@@ -40,9 +40,6 @@ df.reset_index(drop=True, inplace=True)
 df.drop(df[df['lyrics'].str.contains('<span')].index, inplace=True)
 df.reset_index(drop=True, inplace=True)
 
-# with open('Web_App/static/all_lyrics_dataframe.pickle', 'rb') as f:
-#     df = pickle.load(f)
-
 # Lookup table for tracks and artists where keys are "Track by Artist" and value is an index
 TRACKS_AND_ARTISTS = []
 TRACKS_AND_ARTIST_INDEXES = {}
