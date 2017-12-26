@@ -62,7 +62,7 @@
     text-align: left;
     position: fixed;
     top:0;
-    bottom: 30.5%;
+    bottom: 32.5%;
     left: -41%;
     right: 0;
     margin: auto;
@@ -80,6 +80,32 @@
     margin: auto;
     width: 50%;
     height: 50%;
+}
+
+#about_container {
+    text-align: left;
+    position: fixed;
+    top:0;
+    bottom: -100%;
+    left: -41%;
+    right: 0;
+    margin: auto;
+    width: 60%;
+    height: 15%;
+}
+
+#about {
+    font-size: 20.5px;
+    font-family: 'Rubik', sans-serif;
+    color: #7e7e7e;
+    margin-bottom: auto;
+    padding-left: 40px;
+    text-decoration: none;
+}
+
+#about:hover {
+    color: #ec0356;
+    cursor: pointer;
 }
 
 .ui-autocomplete {
