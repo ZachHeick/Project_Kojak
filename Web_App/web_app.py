@@ -9,36 +9,36 @@ import pickle
 
 app = flask.Flask(__name__)
 
-POSTGRESQL_U = str(os.environ['zU'])
-POSTGRESQL_P = str(os.environ['zP'])
-AWS_PROJECT_KOJAK_EC2 = str(os.environ['AWS_PROJECT_KOJAK_EC2'])
-
-# Connect to database
-DB_URL = 'postgresql://' + POSTGRESQL_U + ':' + POSTGRESQL_P + AWS_PROJECT_KOJAK_EC2
-engine = create_engine(DB_URL)
-
-df = pd.read_sql_query('''SELECT
-                           tracks.track_name,
-                           artists.artist_name,
-                           tracks.album_art,
-                           lyrics.lyrics,
-                           tracks.track_id,
-                           track_previews.track_preview_url
-                           FROM tracks
-                           JOIN artists ON tracks.artist_id = artists.artist_id
-                           JOIN lyrics ON tracks.track_id = lyrics.track_id
-                           JOIN track_previews ON track_previews.track_id = tracks.track_id
-                           WHERE tracks.energy IS NOT NULL
-                           AND lyrics.lyrics IS NOT NULL
-                           AND artists.artist_name != 'Kid Rock'
-                           ORDER BY tracks.track_name;''', engine)
-
-# Create dataframe
-df['track_name'] = df['track_name'].apply(lambda i: string.capwords(i))
-df.drop_duplicates(subset=['track_name', 'artist_name'], inplace=True)
-df.reset_index(drop=True, inplace=True)
-df.drop(df[df['lyrics'].str.contains('<span')].index, inplace=True)
-df.reset_index(drop=True, inplace=True)
+# POSTGRESQL_U = str(os.environ['zU'])
+# POSTGRESQL_P = str(os.environ['zP'])
+# AWS_PROJECT_KOJAK_EC2 = str(os.environ['AWS_PROJECT_KOJAK_EC2'])
+#
+# # Connect to database
+# DB_URL = 'postgresql://' + POSTGRESQL_U + ':' + POSTGRESQL_P + AWS_PROJECT_KOJAK_EC2
+# engine = create_engine(DB_URL)
+#
+# df = pd.read_sql_query('''SELECT
+#                            tracks.track_name,
+#                            artists.artist_name,
+#                            tracks.album_art,
+#                            lyrics.lyrics,
+#                            tracks.track_id,
+#                            track_previews.track_preview_url
+#                            FROM tracks
+#                            JOIN artists ON tracks.artist_id = artists.artist_id
+#                            JOIN lyrics ON tracks.track_id = lyrics.track_id
+#                            JOIN track_previews ON track_previews.track_id = tracks.track_id
+#                            WHERE tracks.energy IS NOT NULL
+#                            AND lyrics.lyrics IS NOT NULL
+#                            AND artists.artist_name != 'Kid Rock'
+#                            ORDER BY tracks.track_name;''', engine)
+#
+# # Create dataframe
+# df['track_name'] = df['track_name'].apply(lambda i: string.capwords(i))
+# df.drop_duplicates(subset=['track_name', 'artist_name'], inplace=True)
+# df.reset_index(drop=True, inplace=True)
+# df.drop(df[df['lyrics'].str.contains('<span')].index, inplace=True)
+# df.reset_index(drop=True, inplace=True)
 
 with open('Web_App/static/all_lyrics_dataframe.pickle', 'rb') as f:
     df = pickle.load(f)
