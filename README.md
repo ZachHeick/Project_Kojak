@@ -32,4 +32,6 @@ Listed below in cronological order are the folders containing code for this proj
 
 `Web_App` contains files for [Mix Retriever](http://www.mixretriever.com/).  
 
+`requirements.txt` lists the packages needed for the web app only, not the entire project.  
+
 The blog post can be found [here](https://zachheick.github.io/2017/12/12/Mix-Retriever/).
