@@ -24,4 +24,9 @@ CREATE TABLE lyrics(
 track_id TEXT PRIMARY KEY,
 lyrics TEXT
 );
+
+CREATE TABLE track_previews(
+track_id TEXT PRIMARY KEY,
+track_preview_url TEXT
+);
 ```
