@@ -21,7 +21,8 @@ Listed below in cronological order are the folders containing code for this proj
   2. `Get_Artists.ipynb`  
   3. `Get_Tracks.py`  
   4. `Get_Lyrics.ipynb`  
-  5. `Upload_to_S3.ipynb`  
+  5. `Get_Track_Previews.py`  
+  6. `Upload_to_S3.ipynb`  
 
 
 `Pipeline`  
