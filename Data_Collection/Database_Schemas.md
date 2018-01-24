@@ -2,7 +2,8 @@
 CREATE TABLE artists(
 artist_name TEXT,
 artist_id TEXT PRIMARY KEY,
-artist_popularity TEXT 
+artist_popularity TEXT,
+artist_type TEXT 
 );
 
 CREATE TABLE tracks(
