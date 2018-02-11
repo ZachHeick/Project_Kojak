@@ -11,7 +11,7 @@ I love discovering new music, especially when it comes to Hip-Hop. Today, music 
 
 To combine the functionality of individual song-based playlist generators with a focus on making content based recommendations, I created a web app called "Mix Retriever" that builds a hip-hop playlist of songs with similar lyrical meaning and mood around a song specified by the user.  
 
-[Mix Retriever Logo](mix_retriever_logo.png)  
+![Mix Retriever Logo](mix_retriever_logo.png)  
 
 ---  
 
